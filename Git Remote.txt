@@ -1,0 +1,70 @@
+PM8-PC3+Stagiaire@PM8-PC3 MINGW64 ~/Google Drive/collaboration (dev)
+$ git remote -v
+origin  https://github.com/NoceraJeremy/collaboration (fetch)
+origin  https://github.com/NoceraJeremy/collaboration (push)
+upstream        https://github.com/vincent-courtalon/collaboration.git (fetch)
+upstream        https://github.com/vincent-courtalon/collaboration.git (push)
+
+
+-------------------------------------------
+pour travailler a plusieurs
+
+A) initialisation
+un depot github distant "maitre", seul le mainteneur a le droit
+de pousser dans ce dépot
+depot maitre -> vincent-courtalon/collaboration.git
+je vais creer une branche dev qui servira a receuillir
+les merges en provenance des développments spécifiques
+
+B) en tant que mainteneur, je travail dedans
+je vais creer une ou plusieurs branches "personnelles"
+pour travailler (avec pour origine dev), par
+exemple une branche vincent
+si je termine un de mes developpement, je merge
+la branche vincent dans la branche dev, et je
+pousse dans le depot origin
+git push origin dev
+
+C) en tant que développeur tiers
+il fork mon dépot sur github, il obtient sa propre
+copie(clone) de mon dépot sur le serveur
+
+ensuite il clone sur sa machine SON depot forké
+son "origin" pointe vers le depot ou il a le droit de
+pousser.
+meme principe, il peut maintenant creer localement sa
+propre branche personnelle pour travailler
+
+Comment rester a jour par rapport au depot du mainteneur
+il va ajouter un deuxieme remote
+upstream        https://github.com/vincent-courtalon/collaboration.git (fetch)
+
+pour resumer
+	origin pointe vers son fork sur le serveur
+	upstream pointe vers le depot du mainteneur
+
+il suffit de faire des
+git pull upstream dev
+pour mettre a jour/récupérer les derniers commit en
+provenance du dépot du mainteneur
+
+je ne suis pas obliger de merger tout de suite vers
+ma branche personnelle, je le fait quand je suis pret
+
+quand je suis pret
+je merge dev vers ma branche "personnelle"
+et le pousse vers mon depot distant "origin"
+
+via l'interface github, je peut alors demander
+via une "pull request" au mainteneur de merger
+mes commits dans sa branche dev
+
+
+
+
+
+
+
+
+
+

@@ -1,14 +1,14 @@
-BDD créer la BDD: 
-	base_galeriePhoto
-
-
-
-
- * FileStorageManager:
  * ----------------------------------------------------------------------------------------------------
  * ---------- Configuration ---------------------------------------------------------------------------
  * ----------------------------------------------------------------------------------------------------
+ *
+ * BDD créer la BDD: 
+ *
+ *		"base_galeriePhoto"
  * 
+ * ----------------------------------------------------------------------------------------------------
+ *
+ * FileStorageManager:
  * 
  * Ajouter dans "applicationContext.xml":
  * 
@@ -27,6 +27,36 @@ BDD créer la BDD:
  * 		</dependency>
  * 
  * 
- * Créer le répertoire "C:\stockage" en local s'il n'existe pas
+ * Créer le répertoire "C:\stockage" en local s'il n'existe pas( comme définit dans le fichier "applicationContext.xml" )
+ * 
+ * ----------------------------------------------------------------------------------------------------
+ *
+ * Automatiser les DAO:
+ *
+ *
+ * Ajouter dans "pom.xml":
+ * <!-- spring data jpa permet d'automatiser les DAO -->
+ * <dependency>
+ * 		<groupId>org.springframework.data</groupId>
+ * 		<artifactId>spring-data-jpa</artifactId>
+ * 		<version>1.9.4.RELEASE</version>
+ * </dependency>
+ *
+ *
+ *
+ *
+ * "applicationContext.xml":
+ * Ajouter à "<beans"
+ *
+ *		L'attribut: xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+ *
+ *		Dans l'attribut "xsi:schemaLocation" les lignes:
+ *			http://www.springframework.org/schema/data/jpa
+ *			http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+ *
+ *	Puis ajouter dans les beans:
+ *
+ *			<!-- indique à spring où chercher les repository/DAO spring-data à générer -->
+ *			<jpa:repositories base-package="com.bensiali.cote.pouchoy.galeriePhoto.repositories"></jpa:repositories>
  * 
  * ----------------------------------------------------------------------------------------------------

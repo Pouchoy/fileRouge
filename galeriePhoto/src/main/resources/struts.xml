@@ -12,8 +12,33 @@
 
         <default-action-ref name="index"/>
 
-        <action name="index" class="com.bensiali.cote.pouchoy.galeriePhoto.actions.IndexAction" method="index" >
+        <action name="index"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.IndexAction" 
+        		method="index" >
             <result name="success">/index.jsp</result>
+        </action>
+        
+        <!-- ************************************* -->
+        <!-- ********** Actions Galerie ********** -->
+        <!-- ************************************* -->
+        
+        <action name="galerie" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="findAll" >
+            <result name="success" type="json">
+            	<param name="root">galeries</param>
+            	<param name="excludeProperties">.*photos.*</param>
+            </result>
+        </action>
+
+        <action name="galerie/search/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="searchByTitre" >
+        		<param name="searchTerm">{1}</param>
+            <result name="success" type="json">
+            	<param name="root">galeries</param>
+            	<param name="excludeProperties">.*photos.*</param>
+            </result>
         </action>
 
     </package>

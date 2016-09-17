@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,6 +35,7 @@ public class Galerie {
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 	
+	@Column(length=128)
 	public String getTitre() { return titre; }
 	public void setTitre(String titre) { this.titre = titre; }
 	

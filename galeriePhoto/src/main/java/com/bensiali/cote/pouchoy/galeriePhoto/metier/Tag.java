@@ -3,6 +3,7 @@ package com.bensiali.cote.pouchoy.galeriePhoto.metier;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -30,6 +31,7 @@ public class Tag {
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 	
+	@Column(length=128)
 	public String getLibelle() { return libelle; }
 	public void setLibelle(String libelle) { this.libelle = libelle; }
 	

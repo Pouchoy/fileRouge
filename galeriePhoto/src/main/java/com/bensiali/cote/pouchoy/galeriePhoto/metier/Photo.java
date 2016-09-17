@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -42,9 +43,11 @@ public class Photo {
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 	
+	@Column(length=128)
 	public String getNom() { return nom; }
 	public void setNom(String nom) { this.nom = nom; }
 	
+	@Column(length=512)
 	public String getDescription() { return description; }
 	public void setDescription(String description) { this.description = description; }
 	

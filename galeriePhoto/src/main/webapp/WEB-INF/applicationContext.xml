@@ -48,4 +48,12 @@
 
 <tx:annotation-driven transaction-manager="transactionManager" />
 
+	<!-- ========== Beans "custom" ========== -->
+	
+	<!-- Utilisé pour le stockage local des fichiers -->
+	<bean id="fileStorageManager"
+		  class="com.bensiali.cote.pouchoy.galeriePhoto.utils.FileStorageManager">
+		<property name="storageRoot"  value="C:\stockage"/>
+	</bean>
+
 </beans>

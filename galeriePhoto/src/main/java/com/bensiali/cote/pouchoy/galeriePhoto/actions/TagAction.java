@@ -4,30 +4,24 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bensiali.cote.pouchoy.galeriePhoto.metier.Galerie;
-import com.bensiali.cote.pouchoy.galeriePhoto.repositories.GalerieRepository;
-
+import com.bensiali.cote.pouchoy.galeriePhoto.metier.Tag;
+import com.bensiali.cote.pouchoy.galeriePhoto.repositories.TagRepository;
 import com.opensymphony.xwork2.ActionSupport;
 
-/**
- * 
- * @author Bertrand COTE
- *
- */
-public class GalerieAction extends ActionSupport {
+public class TagAction  extends ActionSupport {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private static Logger log = LogManager.getLogger( ActionSupport.class ); 
 	
 	@Autowired
-	private GalerieRepository galerieRepository;
-	public GalerieRepository getGalerieRepository() { return galerieRepository; }
-	public void setGalerieRepository( GalerieRepository galerieRepository) { this.galerieRepository = galerieRepository; }
+	private TagRepository tagRepository;
+	public TagRepository getTagRepository() { return tagRepository; }
+	public void setTagRepository( TagRepository tagRepository) { this.tagRepository = tagRepository; }
 
-	private Iterable<Galerie> galeries;
-	public Iterable<Galerie> getGaleries() {
-		return this.galeries;
+	private Iterable<Tag> tags;
+	public Iterable<Tag> getTags() {
+		return this.tags;
 	}
 	
 	private String searchTerm;
@@ -40,9 +34,9 @@ public class GalerieAction extends ActionSupport {
 		log.info( "GalerieAction.findAll()");
 		
 		
-		this.galeries = this.galerieRepository.findAll(); 
+		this.tags = this.tagRepository.findAll(); 
 		
-		for( Galerie g : this.galeries )
+		for( Tag g : this.tags )
 			log.info( "\t" + g );
 		
 		
@@ -50,16 +44,19 @@ public class GalerieAction extends ActionSupport {
 	}
 	
 	//  GET -> galerie/search/:searchterm
-	public String searchByTitre() {
+	public String searchByLibelle() {
 		
 		log.info( "GalerieAction.searchByTitre(" + this.getSearchTerm() + ")");
 		
-		this.galeries = this.galerieRepository.findByTitreContaining( this.getSearchTerm() );
+		this.tags = this.tagRepository.findByLibelleContaining( this.getSearchTerm() );
 		
-		for( Galerie g : this.galeries )
+		for( Tag g : this.tags )
 			log.info( "\t" + g );
 		
 		return SUCCESS;
 	}
-
+	
 }
+
+
+

@@ -2,7 +2,6 @@ package com.bensiali.cote.pouchoy.galeriePhoto.repositories;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.bensiali.cote.pouchoy.galeriePhoto.metier.Galerie;
 import com.bensiali.cote.pouchoy.galeriePhoto.metier.Tag;
 
 /**
@@ -18,5 +17,7 @@ import com.bensiali.cote.pouchoy.galeriePhoto.metier.Tag;
  *
  */
 public interface TagRepository extends PagingAndSortingRepository<Tag, Integer> {
+	
+	public Iterable<Tag> findByLibelleContaining( String libelle );
 
 }

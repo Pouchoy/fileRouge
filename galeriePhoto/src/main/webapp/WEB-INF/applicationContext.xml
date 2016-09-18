@@ -25,11 +25,11 @@
        					   http://www.springframework.org/schema/data/jpa
        					   http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
 	   default-autowire="byName">
-
-	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 	   
 	<!-- indique à spring où chercher les repository/DAO spring-data à générer -->
 	<jpa:repositories base-package="com.bensiali.cote.pouchoy.galeriePhoto.repositories"></jpa:repositories>
+
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 	
 	<bean id="dataSource"
 		  class="org.springframework.jdbc.datasource.DriverManagerDataSource">

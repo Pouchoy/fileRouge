@@ -58,5 +58,18 @@
  *
  *			<!-- indique à spring où chercher les repository/DAO spring-data à générer -->
  *			<jpa:repositories base-package="com.bensiali.cote.pouchoy.galeriePhoto.repositories"></jpa:repositories>
+ *
+ *
+ *	Ajouter à web.xml le filtre:
+ *
+ *		<!-- ce filtre autorise les requettes ajax cross domaine -->
+  <filter>
+  	<filter-name>CorsFilter</filter-name>
+  	<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+  	<init-param>
+  		<param-name>cors.allowed.origins</param-name>
+  		<param-value>http://localhost, http://localhost:8080</param-value>
+  	</init-param>
+</filter>
  * 
  * ----------------------------------------------------------------------------------------------------

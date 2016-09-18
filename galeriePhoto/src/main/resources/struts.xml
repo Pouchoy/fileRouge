@@ -40,6 +40,29 @@
             	<param name="excludeProperties">.*photos.*</param>
             </result>
         </action>
+        
+        <!-- ********************************* -->
+        <!-- ********** Actions Tag ********** -->
+        <!-- ********************************* -->
+        
+        <action name="tag" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="findAll" >
+            <result name="success" type="json">
+            	<param name="root">tags</param>
+            	<param name="excludeProperties">.*photos.*</param>
+            </result>
+        </action>
+
+        <action name="tag/search/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="searchByLibelle" >
+        		<param name="searchTerm">{1}</param>
+            <result name="success" type="json">
+            	<param name="root">tags</param>
+            	<param name="excludeProperties">.*photos.*</param>
+            </result>
+        </action>
 
     </package>
 

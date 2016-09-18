@@ -34,7 +34,6 @@ public class GalerieAction extends ActionSupport implements ModelDriven<Galerie>
 	public void setGalerieRepository( GalerieRepository galerieRepository) { this.galerieRepository = galerieRepository; }
 
 	public Iterable<Galerie> getGaleries() { return this.galeries; }
-	public void setGalerie( Galerie model ) { this.model = model; }
 	
 	public String getSearchTerm() { return this.searchTerm; }
 	public void setSearchTerm(String searchTerm) { this.searchTerm = searchTerm; }
@@ -48,6 +47,7 @@ public class GalerieAction extends ActionSupport implements ModelDriven<Galerie>
 			this.model = new Galerie();
 		return this.model;
 	}
+	public void setModel( Galerie model ) { this.model = model; }
 	
 	// =====================================================================
 	// ========== Actions ==================================================

@@ -1,59 +1,128 @@
 package com.bensiali.cote.pouchoy.galeriePhoto.actions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.bensiali.cote.pouchoy.galeriePhoto.metier.Galerie;
 import com.bensiali.cote.pouchoy.galeriePhoto.metier.Photo;
-import com.bensiali.cote.pouchoy.galeriePhoto.repositories.PhotoRepository;
+import com.bensiali.cote.pouchoy.galeriePhoto.metier.Tag;
+import com.bensiali.cote.pouchoy.galeriePhoto.repositories.PhotoRepositoryInterface;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class PhotoAction extends ActionSupport {
+public class PhotoAction extends ActionSupport  {
 	
 	private static final long serialVersionUID = 1L;
+	private static Logger log = LogManager.getLogger(Photo.class); 
 	
-	private static Logger log = LogManager.getLogger( ActionSupport.class ); 
+	private PhotoRepositoryInterface photoRepository;
+	private int photoId;
+	private String nom;
+	private String description;
 	
-	@Autowired
-	private PhotoRepository photoRepository;
-	public PhotoRepository getPhotoRepository() { return photoRepository; }
-	public void setPhotoRepository( PhotoRepository photoRepository) { this.photoRepository = photoRepository; }
+	
+	public void setPhotoRepository( PhotoRepositoryInterface photoRepository ) { this.photoRepository = photoRepository; }
+	
+	public String getNom() { return nom; }
+	public void setNom( String nom ) { this.nom = nom; }
+	
+	public String getDescription() {return description;}
+	public void setDescription(String description) {this.description = description;}
 
-	private Iterable<Photo> photos;
-	public Iterable<Photo> getPhotos() {
-		return this.photos;
-	}
+	public int getPhotoId() {return photoId;}
+	public void setPhotoId(int photoId) {this.photoId = photoId;}
 	
-	private String searchTerm;
-	public String getSearchTerm() { return this.searchTerm; }
-	public void setSearchTerm(String searchTerm) { this.searchTerm = searchTerm; }
+
 	
-	//  GET -> galerie
-	public String findAll() {
+	/*
+	 *  sert a interagir avec l'upload de fichier en provenance d'un champ de type File
+	 * 
+	 */
+	// le champs file va s'appeler image
+	private File image; // le fichier temporaire uploadé
+	private String imageContentType; // type du fichier uploadé
+	private String imageFileName; // le nom du fichier original
+	private Galerie galerie;
+	private Set<Tag> tags;
+	private List<Photo> photos;
+	
+	public void setImage(File image) {this.image = image;}
+
+	public String getImageContentType() {return imageContentType;}
+	public void setImageContentType(String imageContentType) {this.imageContentType = imageContentType;}
+
+	public String getImageFileName() {return imageFileName;}
+	public void setImageFileName(String imageFileName) {this.imageFileName = imageFileName;}
+
+	public Galerie getGalerie() {return this.galerie;}
+	public void setGalerie( Galerie galerie ) {this.galerie = galerie;}
+
+	public Set<Tag> getTags() {return this.tags;}
+	public void setTags( Set<Tag> tags ) {this.tags = tags;}
+	
+	public List<Photo> getPhotos() { return photos; }
+	
+	
+
+	// l'objet renvoyant les données binaire de l'image
+	private InputStream imageStream;
+	public InputStream getImageStream() { return imageStream; }
+	
+	
+	
+	public String liste() {
 		
-		log.info( this.getClass().getSimpleName() + ".findAll()");
+		log.info(this.photoRepository);
 		
-		
-		this.photos = this.photoRepository.findAll(); 
-		
-		for( Photo g : this.photos )
-			log.info( "\t" + g );
-		
-		
+		this.photos = this.photoRepository.findAll();
 		return SUCCESS;
 	}
 	
-	//  GET -> galerie/search/:searchterm
-	public String searchByNom() {
-		
-		log.info( this.getClass().getSimpleName() + ".searchByNom(" + this.getSearchTerm() + ")");
-		
-		this.photos = this.photoRepository.findByNomContaining( this.getSearchTerm() );
-		
-		for( Photo g : this.photos )
-			log.info( "\t" + g );
-		
+	public String affiche() {
+		Photo photo = photoRepository.findById( this.getPhotoId() );
+		File f = photoRepository.getPhotoFile( photo );
+		this.setImageContentType( photo.getContentType() );
+		this.setImageFileName( photo.getFileName() );
+		try {
+			this.imageStream = new FileInputStream(f);
+			return SUCCESS;
+		} catch (FileNotFoundException e) {
+			log.error(e);
+		}
+		return "error";
+	}
+	
+	
+	public String edit() {
 		return SUCCESS;
 	}
-
+	
+	public String save() {
+		
+		photoRepository.save( new Photo(0, nom, description, new Date(), imageFileName, imageContentType, galerie, tags ), image);
+		return SUCCESS;
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

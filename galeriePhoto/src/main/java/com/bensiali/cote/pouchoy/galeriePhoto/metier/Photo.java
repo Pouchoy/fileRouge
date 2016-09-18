@@ -76,7 +76,7 @@ public class Photo {
 
 	public Photo() { this( 0, "", "", null, "", "", null, null ); }
 	public Photo(int id, String nom, String description, Date dateCreation, String fileName, String contentType,
-			Galerie galerie, Set<Tag> tags) {
+			Galerie galerie, Set<Tag> tags ) {
 		super();
 		this.id = id;
 		this.nom = nom;

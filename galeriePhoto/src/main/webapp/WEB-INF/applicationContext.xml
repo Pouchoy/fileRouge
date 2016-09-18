@@ -59,6 +59,8 @@
 	
 	<!-- ========== Beans "custom" ========== -->
 	
+	<bean id="photoRepository" class="com.bensiali.cote.pouchoy.galeriePhoto.repositories.PhotoRepository" />
+	
 	<!-- Utilisé pour le stockage local des fichiers -->
 	<bean id="fileStorageManager"
 		  class="com.bensiali.cote.pouchoy.galeriePhoto.utils.FileStorageManager">

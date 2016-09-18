@@ -144,6 +144,8 @@
         <!-- ********** Actions Photo ********** -->
         <!-- *********************************** -->
         
+        <!-- ========== JSON ========== -->
+        
         <action name="photo" 
         		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction" 
         		method="findAll" >
@@ -159,6 +161,37 @@
             <result name="success" type="json">
             	<param name="root">photos</param>
             </result>
+        </action>
+        
+        <!-- ========== CRUD ========== -->
+        
+        <action name="photo/liste"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
+        		method="liste" >
+            <result name="success">/photo/liste.jsp</result>
+        </action>
+        
+        <action name="photo/affiche/*"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
+        		method="affiche" >
+        	<param name="photoId">{1}</param>
+            <result name="success" type="stream">
+            	<param name="inputName">imageStream</param>
+            	<param name="contentType">${imageContentType}</param>
+            	<param name="contentDisposition">attachment;filename="${imageFileName}"</param>
+            </result>
+        </action>
+        
+        <action name="photo/save"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
+        		method="save" >
+            <result name="success" type="redirect">/photo/liste</result>
+		</action>
+		
+		<action name="photo/edit" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction" 
+        		method="edit" >
+            <result name="success">/photo/upload.jsp</result>
         </action>
 
     </package>

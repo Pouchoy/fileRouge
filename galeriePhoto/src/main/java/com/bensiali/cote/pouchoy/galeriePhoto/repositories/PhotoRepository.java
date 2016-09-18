@@ -17,5 +17,7 @@ import com.bensiali.cote.pouchoy.galeriePhoto.metier.Photo;
  *
  */
 public interface PhotoRepository extends PagingAndSortingRepository<Photo, Integer> {
+	
+	public Iterable<Photo> findByNomContaining( String nom );
 
 }

@@ -63,6 +63,27 @@
             	<param name="excludeProperties">.*photos.*</param>
             </result>
         </action>
+        
+        <!-- *********************************** -->
+        <!-- ********** Actions Photo ********** -->
+        <!-- *********************************** -->
+        
+        <action name="photo" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction" 
+        		method="findAll" >
+            <result name="success" type="json">
+            	<param name="root">photos</param>
+            </result>
+        </action>
+
+        <action name="photo/search/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction" 
+        		method="searchByNom" >
+        		<param name="searchTerm">{1}</param>
+            <result name="success" type="json">
+            	<param name="root">photos</param>
+            </result>
+        </action>
 
     </package>
 

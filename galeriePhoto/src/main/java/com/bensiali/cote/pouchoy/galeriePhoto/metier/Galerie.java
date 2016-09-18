@@ -50,7 +50,7 @@ public class Galerie {
 	}
 	public void setPhotos(Set<Photo> photos) { this.photos = photos; }
 	
-	public Galerie(){ this( 0, "", null, null); }
+	public Galerie(){ this( 0, "", new Date(), null); }
 	public Galerie(int id, String titre, Date dateCreation, Set<Photo> photos) {
 		this.id = id;
 		this.titre = titre;

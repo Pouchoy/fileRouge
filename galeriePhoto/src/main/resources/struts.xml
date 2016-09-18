@@ -22,6 +22,8 @@
         <!-- ********** Actions Galerie ********** -->
         <!-- ************************************* -->
         
+        <!-- ========== JSON ========== -->
+        
         <action name="galerie" 
         		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
         		method="findAll" >
@@ -40,6 +42,44 @@
             	<param name="excludeProperties">.*photos.*</param>
             </result>
         </action>
+        
+        <!-- ========== CRUD ========== -->
+        
+        <action name="galerie/liste" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="liste" >
+            <result name="success">/galerie/liste.jsp</result>
+        </action>
+
+        <action name="galerie/edit/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="edit" >
+        	<param name="id">{1}</param>
+            <result name="success">/galerie/edit.jsp</result>
+            <result name="notFound" type="redirect">/galerie/liste</result>
+        </action>
+
+        <action name="galerie/save" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="save" >
+            <result name="success" type="redirect">/galerie/liste</result>
+            <result name="input">galerie/edit.jsp</result>
+        </action>
+
+        <action name="galerie/create" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="create" >
+            <result name="success">/galerie/edit.jsp</result>
+        </action>
+
+        <action name="galerie/remove/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="remove" >
+        	<param name="id">{1}</param>
+            <result name="success" type="redirect">/galerie/liste</result>
+        </action>
+        
+        
         
         <!-- ********************************* -->
         <!-- ********** Actions Tag ********** -->

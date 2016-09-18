@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ModelDriven;
  * @author Bertrand COTE
  *
  */
-public class GalerieAction extends ActionSupport  implements ModelDriven<Galerie>{
+public class GalerieAction extends ActionSupport implements ModelDriven<Galerie> {
 	
 	private static final long serialVersionUID = 1L;
 	private static Logger log = LogManager.getLogger( ActionSupport.class ); 
@@ -89,7 +89,7 @@ public class GalerieAction extends ActionSupport  implements ModelDriven<Galerie
 		log.info( this.getClass().getName() + ": appel de 'String edit()'");
 		
 		Galerie galerie = this.galerieRepository.findOne( this.getModel().getId() );
-		if( galerieRepository == null )
+		if( galerie == null )
 			return "notFound";
 		
 		this.getModel().setTitre( galerie.getTitre() );

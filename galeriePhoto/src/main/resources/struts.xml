@@ -79,11 +79,11 @@
             <result name="success" type="redirect">/galerie/liste</result>
         </action>
         
-        
-        
         <!-- ********************************* -->
         <!-- ********** Actions Tag ********** -->
         <!-- ********************************* -->
+        
+        <!-- ========== JSON ========== -->
         
         <action name="tag" 
         		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
@@ -102,6 +102,42 @@
             	<param name="root">tags</param>
             	<param name="excludeProperties">.*photos.*</param>
             </result>
+        </action>
+        
+        <!-- ========== CRUD ========== -->
+        
+        <action name="tag/liste" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="liste" >
+            <result name="success">/tag/liste.jsp</result>
+        </action>
+
+        <action name="tag/edit/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="edit" >
+        	<param name="id">{1}</param>
+            <result name="success">/tag/edit.jsp</result>
+            <result name="notFound" type="redirect">/tag/liste</result>
+        </action>
+
+        <action name="tag/save" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="save" >
+            <result name="success" type="redirect">/tag/liste</result>
+            <result name="input">tag/edit.jsp</result>
+        </action>
+
+        <action name="tag/create" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="create" >
+            <result name="success">/tag/edit.jsp</result>
+        </action>
+
+        <action name="tag/remove/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="remove" >
+        	<param name="id">{1}</param>
+            <result name="success" type="redirect">/tag/liste</result>
         </action>
         
         <!-- *********************************** -->

@@ -151,6 +151,13 @@
         		method="findAll" >
             <result name="success" type="json">
             	<param name="root">photos</param>
+            	
+            	<param name="excludeProperties">.*dateCreation.*</param>
+            	<param name="excludeProperties">.*fileName.*</param>
+            	<param name="excludeProperties">.*contentType.*</param>
+            	<param name="excludeProperties">.*galerie.*</param>
+            	<param name="excludeProperties">.*tags.*</param>
+            	
             </result>
         </action>
 
@@ -165,12 +172,6 @@
         
         <!-- ========== CRUD ========== -->
         
-        <action name="photo/liste"
-        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
-        		method="liste" >
-            <result name="success">/photo/liste.jsp</result>
-        </action>
-        
         <action name="photo/affiche/*"
         		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
         		method="affiche" >
@@ -182,10 +183,17 @@
             </result>
         </action>
         
+        <action name="photo/liste"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
+        		method="liste" >
+            <result name="success">/photo/liste.jsp</result>
+        </action>
+        
         <action name="photo/save"
         		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
         		method="save" >
             <result name="success" type="redirect">/photo/liste</result>
+            <result name="input">photo/upload.jsp</result>
 		</action>
 
         <action name="photo/edit/*" 

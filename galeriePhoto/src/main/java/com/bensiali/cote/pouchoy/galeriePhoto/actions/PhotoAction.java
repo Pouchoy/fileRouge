@@ -8,11 +8,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.bensiali.cote.pouchoy.galeriePhoto.metier.Galerie;
 import com.bensiali.cote.pouchoy.galeriePhoto.metier.Photo;
 import com.bensiali.cote.pouchoy.galeriePhoto.metier.Tag;
+import com.bensiali.cote.pouchoy.galeriePhoto.repositories.PhotoRepository;
 import com.bensiali.cote.pouchoy.galeriePhoto.repositories.PhotoRepositoryInterface;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -20,6 +24,11 @@ public class PhotoAction extends ActionSupport  {
 	
 	private static final long serialVersionUID = 1L;
 	private static Logger log = LogManager.getLogger(Photo.class); 
+
+	@PersistenceContext
+	private EntityManager em;
+	public EntityManager getEm() { return em; }
+	public void setEm(EntityManager em) { this.em = em; }
 	
 	private PhotoRepositoryInterface photoRepository;
 	private int photoId;
@@ -38,8 +47,6 @@ public class PhotoAction extends ActionSupport  {
 	public int getPhotoId() {return photoId;}
 	public void setPhotoId(int photoId) {this.photoId = photoId;}
 	
-
-	
 	/*
 	 *  sert a interagir avec l'upload de fichier en provenance d'un champ de type File
 	 * 
@@ -51,6 +58,39 @@ public class PhotoAction extends ActionSupport  {
 	private Galerie galerie;
 	private Set<Tag> tags;
 	private List<Photo> photos;
+	
+	private List<Galerie> allGaleries;
+	private List<Tag> allTags;
+	
+	
+	public List<Galerie> getAllGaleries() {
+		this.allGaleries = em.createQuery("FROM Galerie", Galerie.class).getResultList();
+		
+		log.info( PhotoRepository.class.getName() + "getAllGaleries()" );
+		for( Galerie g : this.allGaleries )
+			log.info( "\t ==========" + g );
+		
+		return allGaleries;
+		}
+	public void setAllGaleries( List<Galerie> allGaleries ) {
+		log.info( PhotoRepository.class.getName() + "setAllGaleries()" );
+		this.allGaleries = allGaleries; }
+
+	
+	public List<Tag> getAllTags() {
+		this.allTags = em.createQuery("FROM Tag", Tag.class).getResultList();
+		
+		log.info( PhotoRepository.class.getName() + "getAllTags()" );
+		for( Tag g : this.allTags )
+			log.info( "\t========== " + g );
+		
+		return this.allTags;
+	}
+	public void setAllTags( List<Tag> allTags ) { 
+		log.info( PhotoRepository.class.getName() + "setAllTags()" );
+		this.allTags = allTags; 
+	}
+	
 	
 	public void setImage(File image) {this.image = image;}
 
@@ -73,6 +113,17 @@ public class PhotoAction extends ActionSupport  {
 	// l'objet renvoyant les données binaire de l'image
 	private InputStream imageStream;
 	public InputStream getImageStream() { return imageStream; }
+	
+	public String findAll() {
+		this.photos = em.createQuery("FROM Photo", Photo.class).getResultList();
+
+		
+		log.info( PhotoRepository.class.getName() + "findAll()" );
+		for( Photo g : this.photos )
+			log.info( "\t========== " + g );
+		
+		return SUCCESS;
+	}
 	
 	
 	

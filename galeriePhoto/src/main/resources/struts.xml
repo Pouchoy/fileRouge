@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.devMode" value="true"/>
+	<constant name="struts.action.extension" value=","/>
+    <constant name="struts.enable.SlashesInActionNames" value="true" />
+
+    <package name="default" namespace="/" extends="json-default">
+
+        <default-action-ref name="index"/>
+
+        <action name="index"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.IndexAction" 
+        		method="index" >
+            <result name="success">/index.jsp</result>
+        </action>
+        
+        <!-- ************************************* -->
+        <!-- ********** Actions Galerie ********** -->
+        <!-- ************************************* -->
+        
+        <!-- ========== JSON ========== -->
+        
+        <action name="galerie" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="findAll" >
+            <result name="success" type="json">
+            	<param name="root">galeries</param>
+            	<param name="excludeProperties">.*photos.*</param>
+            </result>
+        </action>
+
+        <action name="galerie/search/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="searchByTitre" >
+        		<param name="searchTerm">{1}</param>
+            <result name="success" type="json">
+            	<param name="root">galeries</param>
+            	<param name="excludeProperties">.*photos.*</param>
+            </result>
+        </action>
+        
+        <!-- ========== CRUD ========== -->
+        
+        <action name="galerie/liste" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="liste" >
+            <result name="success">/galerie/liste.jsp</result>
+        </action>
+
+        <action name="galerie/edit/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="edit" >
+        	<param name="id">{1}</param>
+            <result name="success">/galerie/edit.jsp</result>
+            <result name="notFound" type="redirect">/galerie/liste</result>
+        </action>
+
+        <action name="galerie/save" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="save" >
+            <result name="success" type="redirect">/galerie/liste</result>
+            <result name="input">galerie/edit.jsp</result>
+        </action>
+
+        <action name="galerie/create" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="create" >
+            <result name="success">/galerie/edit.jsp</result>
+        </action>
+
+        <action name="galerie/remove/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.GalerieAction" 
+        		method="remove" >
+        	<param name="id">{1}</param>
+            <result name="success" type="redirect">/galerie/liste</result>
+        </action>
+        
+        <!-- ********************************* -->
+        <!-- ********** Actions Tag ********** -->
+        <!-- ********************************* -->
+        
+        <!-- ========== JSON ========== -->
+        
+        <action name="tag" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="findAll" >
+            <result name="success" type="json">
+            	<param name="root">tags</param>
+            	<param name="excludeProperties">.*photos.*</param>
+            </result>
+        </action>
+
+        <action name="tag/search/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="searchByLibelle" >
+        		<param name="searchTerm">{1}</param>
+            <result name="success" type="json">
+            	<param name="root">tags</param>
+            	<param name="excludeProperties">.*photos.*</param>
+            </result>
+        </action>
+        
+        <!-- ========== CRUD ========== -->
+        
+        <action name="tag/liste" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="liste" >
+            <result name="success">/tag/liste.jsp</result>
+        </action>
+
+        <action name="tag/edit/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="edit" >
+        	<param name="id">{1}</param>
+            <result name="success">/tag/edit.jsp</result>
+            <result name="notFound" type="redirect">/tag/liste</result>
+        </action>
+
+        <action name="tag/save" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="save" >
+            <result name="success" type="redirect">/tag/liste</result>
+            <result name="input">tag/edit.jsp</result>
+        </action>
+
+        <action name="tag/create" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="create" >
+            <result name="success">/tag/edit.jsp</result>
+        </action>
+
+        <action name="tag/remove/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.TagAction" 
+        		method="remove" >
+        	<param name="id">{1}</param>
+            <result name="success" type="redirect">/tag/liste</result>
+        </action>
+        
+        <!-- *********************************** -->
+        <!-- ********** Actions Photo ********** -->
+        <!-- *********************************** -->
+        
+        <!-- ========== JSON ========== -->
+        
+        <action name="photo" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction" 
+        		method="findAll" >
+            <result name="success" type="json">
+            	<param name="root">photos</param>
+            </result>
+        </action>
+
+        <action name="photo/search/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction" 
+        		method="searchByNom" >
+        		<param name="searchTerm">{1}</param>
+            <result name="success" type="json">
+            	<param name="root">photos</param>
+            </result>
+        </action>
+        
+        <!-- ========== CRUD ========== -->
+        
+        <action name="photo/liste"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
+        		method="liste" >
+            <result name="success">/photo/liste.jsp</result>
+        </action>
+        
+        <action name="photo/affiche/*"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
+        		method="affiche" >
+        	<param name="photoId">{1}</param>
+            <result name="success" type="stream">
+            	<param name="inputName">imageStream</param>
+            	<param name="contentType">${imageContentType}</param>
+            	<param name="contentDisposition">attachment;filename="${imageFileName}"</param>
+            </result>
+        </action>
+        
+        <action name="photo/save"
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction"
+        		method="save" >
+            <result name="success" type="redirect">/photo/liste</result>
+		</action>
+
+        <action name="photo/edit/*" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction" 
+        		method="edit" >
+        	<param name="id">{1}</param>
+            <result name="success">/photo/upload.jsp</result>
+            <result name="notFound" type="redirect">/photo/liste</result>
+        </action>
+		
+		<action name="photo/edit" 
+        		class="com.bensiali.cote.pouchoy.galeriePhoto.actions.PhotoAction" 
+        		method="edit" >
+            <result name="success">/photo/upload.jsp</result>
+        </action>
+
+    </package>
+
+    <!-- Add addition packages and configuration here. -->
+</struts>

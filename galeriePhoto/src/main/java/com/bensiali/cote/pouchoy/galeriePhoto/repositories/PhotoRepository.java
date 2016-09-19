@@ -29,12 +29,23 @@ public class PhotoRepository implements PhotoRepositoryInterface {
 	// de l'entity manager factory (grace a annotationDriven)
 	@PersistenceContext
 	private EntityManager em;
-	public EntityManager getEm() {return em;}
-	public void setEm(EntityManager em) {this.em = em;}
-	
 	private FileStorageManager fileStorageManager;
-	public FileStorageManager getFileStorageManager() {return fileStorageManager;}
-	public void setFileStorageManager(FileStorageManager fileStorageManager) {this.fileStorageManager = fileStorageManager;}
+	
+	private Photo model;
+	
+	
+	
+	
+	public EntityManager getEm() { return em; }
+	public void setEm(EntityManager em) { this.em = em; }
+	
+	public FileStorageManager getFileStorageManager() { return fileStorageManager; }
+	public void setFileStorageManager(FileStorageManager fileStorageManager) { this.fileStorageManager = fileStorageManager; }
+	
+	
+	
+	
+	
 	@Override
 	@Transactional
 	public Photo save( Photo photo, File file ) {

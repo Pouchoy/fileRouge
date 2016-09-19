@@ -36,6 +36,12 @@
 			
 			<s:a action="galerie/create">Nouvelle galerie</s:a>
 		</div>
+		
+		<div>
+			<s:a action="photo/liste">Liste photos</s:a>
+			<s:a action="galerie/liste">Liste galeries</s:a>
+			<s:a action="tag/liste">Liste tags</s:a>
+		</div>
 	
 	</body>
 </html>
